@@ -12,8 +12,8 @@ if [ "$1" == "build" ]; then
 	else
 		tag=""
 	fi
-	echo "docker build poism/docker-dropbox${tag}"
-	docker build --no-cache -t "poism/docker-dropbox${tag}" .
+	echo "docker build poism/dropbox${tag}"
+	docker build --no-cache -t "poism/dropbox${tag}" .
 elif [ -z "$1"]; then
 	echo "Error: No path to env file given. See sample.env"
 	exit 1
@@ -39,7 +39,7 @@ if [ "$2" == "start" ]; then
 		-v ${DROPBOX_APPDATA}:/dbox/.dropbox \
 		-e DBOX_UID=${DROPBOX_UID} \
 		-e DBOX_GID=${DROPBOX_GID} \
-		janeczku/dropbox
+		poism/dropbox
 	else
 		docker run -d --restart=always --name=${DROPBOX_IMAGE} \
 		--net="host" \
@@ -47,7 +47,7 @@ if [ "$2" == "start" ]; then
 		-v ${DROPBOX_APPDATA}:/dbox/.dropbox \
 		-e DBOX_UID=${DROPBOX_UID} \
 		-e DBOX_GID=${DROPBOX_GID} \
-		janeczku/dropbox
+		poism/dropbox
 	fi
 	
 	docker logs ${DROPBOX_IMAGE}
