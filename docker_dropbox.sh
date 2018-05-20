@@ -13,8 +13,9 @@ if [ "$1" == "build" ]; then
 		tag=""
 	fi
 	echo "docker build poism/dropbox${tag}"
-	docker build --no-cache -t "poism/dropbox${tag}" .
-elif [ -z "$1"]; then
+	docker build --no-cache -t "poism/dropbox${tag}" -t "poism/dropbox:latest" .
+	exit
+elif [ -z "$1" ]; then
 	echo "Error: No path to env file given. See sample.env"
 	exit 1
 elif [ ! -f "$1" ]; then
